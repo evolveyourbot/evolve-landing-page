@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://evolve-landing-page-seo.vercel.app/sitemap.xml
