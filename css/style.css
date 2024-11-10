@@ -1,0 +1,373 @@
+:root {
+    --text-primary: #ffffff;
+    --text-secondary: #808080;
+    --accent: #1a1a1a;
+    --background: #000000;
+    --terminal-text: #ffffff;
+    --border-color: #333333;
+    --hover-color: #404040;
+    --status-green: #00ff00;
+    --warning-red: #ff0033;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: 'Space Mono', monospace;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2rem;
+}
+
+h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    filter: contrast(150%) brightness(150%);
+    animation: subtle-glitch 8s infinite;
+}
+
+.terminal {
+    background: var(--accent);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    margin: 2rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+    min-height: 200px;
+    width: 100%;
+    text-align: center;
+}
+
+.terminal:hover {
+    transform: scale(1.02);
+    background: var(--hover-color);
+}
+
+.cursor {
+    color: var(--terminal-text);
+    animation: blink 1s infinite;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--text-primary);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes subtle-glitch {
+    0%, 100% { transform: translate(0) }
+    98% { transform: translate(-2px, 2px) skew(3deg) }
+    99% { transform: translate(2px, -2px) skew(-3deg) }
+}
+
+.hover-glitch {
+    position: relative;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    text-transform: uppercase;
+}
+
+.hover-glitch:hover {
+    background: var(--hover-color);
+    border-color: var(--text-secondary);
+}
+
+.hover-glitch:hover::before {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: 1px 0 var(--text-secondary);
+    top: 0;
+    color: var(--text-primary);
+    background: var(--background);
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: noise-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim {
+    0% {
+        clip: rect(51px, 9999px, 28px, 0);
+    }
+    5% {
+        clip: rect(70px, 9999px, 19px, 0);
+    }
+    10% {
+        clip: rect(92px, 9999px, 13px, 0);
+    }
+    /* ... add more keyframes as needed ... */
+    100% {
+        clip: rect(91px, 9999px, 83px, 0);
+    }
+}
+
+.matrix-container {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    background: var(--accent);
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.matrix-container:hover {
+    border-color: var(--status-green);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.matrix-line {
+    font-family: 'Space Mono', monospace;
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+    padding-left: 0;
+    position: relative;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.matrix-line:hover {
+    color: var(--text-primary);
+    transform: scale(1.05);
+}
+
+.matrix-line::before {
+    content: '>';
+    position: absolute;
+    left: -10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.matrix-line:hover::before {
+    opacity: 1;
+    left: 0;
+}
+
+.matrix-container:hover .matrix-line {
+    animation: none;
+}
+
+.ml-options-container {
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ml-option {
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+    margin: 1rem auto;
+    padding: 1rem 2rem;
+    position: relative;
+}
+
+.ml-option:hover {
+    border-left-color: var(--text-primary);
+    background: var(--hover-color);
+    transform: scale(1.02);
+}
+
+.option-text {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.option-desc {
+    display: block;
+    color: var(--text-secondary);
+    margin-left: 1.5rem;
+}
+
+.option-details {
+    margin-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.option-details span {
+    display: block;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.option-details span::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+}
+
+.ml-option:hover .option-desc {
+    opacity: 1;
+}
+
+.option-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.9em;
+    opacity: 0;
+    height: 0;
+    transition: all 0.3s ease;
+}
+
+.ml-option:hover .option-details {
+    opacity: 1;
+    height: auto;
+}
+
+.option-details span {
+    color: var(--text-secondary);
+    padding-left: 1rem;
+}
+
+.option-details span::before {
+    content: '>';
+    margin-right: 0.5rem;
+    color: var(--text-primary);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.status-online {
+    color: var(--status-green);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.dev-info {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    background: var(--accent);
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.dev-info .matrix-line {
+    color: var(--text-primary);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.dev-info:hover {
+    border-color: var(--status-green);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+@keyframes subtle-pulse {
+    0% { opacity: 0.9; }
+    50% { opacity: 1; }
+    100% { opacity: 0.9; }
+}
+
+.dev-info .matrix-line {
+    animation: subtle-pulse 4s infinite;
+}
+
+.contact-box {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    background: var(--accent);
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.contact-box:hover {
+    border-color: var(--status-green);
+    transform: translateY(-2px);
+}
+
+.contact-header {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 1px solid var(--border-color);
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.contact-info {
+    margin-top: 1rem;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.contact-info span {
+    display: block;
+    margin: 0.5rem 0;
+}
+
+.cursor-trail {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background-color: var(--status-green);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.6;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+
+.dev-info .matrix-line {
+    content: "> ROBOTICS & ML DEVELOPER | CMU ROBOTICS";
+}
